@@ -1,119 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #ecf0f3;
-            font-family: sans-serif;
-            outline: none;  
-            }
-        .container{
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }    
-        .calculator{
-            background-color: #ecf0f3;
-            padding: 15px;
-            border-radius: 30px;
-            box-shadow: inset 5px 5px 12px #ffffff,
-                              5px 5px 12px rgba(0,0,0,.16);
-            display: grid;
-            grid-template-columns: repeat(4,68px); 
-        }
-        input{
-            grid-column: span 4;
-            height: 70px;
-            width: 260px;
-            background-color: #ecf0f3;
-            box-shadow: inset -5px -5px 12px #ffffff,
-                        inset 5px 5px 12px rgba(0,0,0,.16);
-            border: none;
-            border-radius: 30px;
-            color: rgb(70, 70, 70);
-            font-size: 50px;
-            text-align: end;
-            margin: auto;
-            margin-top: 40px;
-            margin-bottom: 30px;
-            padding: 20px;            
-        }
-        button{
-            height: 48px;
-            width: 48px;
-            background-color: #ecf0f3;
-            box-shadow: -5px -5px 12px #ffffff,
-                         5px 5px 12px rgba(0,0,0,.16);
-            border: none;
-            border-radius: 50%;
-            margin: 8px;
-            font-size: 16px;
-        }
-        .equal{
-            width: 115px;
-            border-radius: 40px;
-            background-color: #ecf0f3;
-            box-shadow: -5px -5px 12px #ffffff,
-                         5px 5px 12px rgba(0,0,0,.16);
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #ecf0f3;
+        font-family: sans-serif;
+        outline: none;
+      }
 
+      .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .calculator {
+        background-color: #ecf0f3;
+        padding: 15px;
+        border-radius: 30px;
+        box-shadow: inset 5px 5px 12px #ffffff, 5px 5px 12px rgba(0, 0, 0, 0.16);
+        display: grid;
+        grid-template-columns: repeat(4, 68px);
+        position: relative;
+      }
+
+      input {
+        grid-column: span 4;
+        height: 70px;
+        width: 260px;
+        background-color: #ecf0f3;
+        box-shadow: inset -5px -5px 12px #ffffff, inset 5px 5px 12px rgba(0, 0, 0, 0.16);
+        border: none;
+        border-radius: 30px;
+        color: rgb(70, 70, 70);
+        font-size: 50px;
+        text-align: end;
+        margin: auto;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        padding: 20px;
+      }
+
+      button {
+        height: 48px;
+        width: 48px;
+        background-color: #ecf0f3;
+        box-shadow: -5px -5px 12px #ffffff, 5px 5px 12px rgba(0, 0, 0, 0.16);
+        border: none;
+        border-radius: 50%;
+        margin: 8px;
+        font-size: 16px;
+      }
+
+      .equal {
+        width: 115px;
+        border-radius: 40px;
+        background-color: #ecf0f3;
+        box-shadow: -5px -5px 12px #ffffff, 5px 5px 12px rgba(0, 0, 0, 0.16);
+      }
+
+      #toggle-mode {
+        position: absolute;
+        top: 10px;
+        right: 5px;
+        height: 30px;
+        width: 30px;
+        background-color: #ecf0f3;
+        box-shadow: -5px -5px 12px #ffffff, 5px 5px 12px rgba(0, 0, 0, 0.16);
+        border: none;
+        border-radius: 50%;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .dark-mode {
+        background-color: #333;
+        color: #fff;
+      }
+
+      .dark-mode button,
+      .dark-mode input {
+        background-color: #333;
+        box-shadow: inset -5px -5px 12px rgba(255, 255, 255, 0.1), inset 5px 5px 12px rgba(0, 0, 0, 0.5);
+        color: #fff;
+      }
     </style>
     <title>Calculator</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="calculator">
-            <input type="text" placeholder="0" id="output-screen">
-            <button onclick="Clear()">Cl</button>
-            <button onclick="del()">Del</button>
-            <button onclick="display('%')">%</button>
-            <button onclick="display('/')">/</button>
-            <button onclick="display('7')">7</button>
-            <button onclick="display('8')">8</button>
-            <button onclick="display('9')">9</button>
-            <button onclick="display('*')">*</button>
-            <button onclick="display('4')">4</button>
-            <button onclick="display('5')">5</button>
-            <button onclick="display('6')">6</button>
-            <button onclick="display('-')">-</button>
-            <button onclick="display('1')">1</button>
-            <button onclick="display('2')">2</button>
-            <button onclick="display('3')">3</button>
-            <button onclick="display('+')">+</button>
-            <button onclick="display('.')">.</button>
-            <button onclick="display('0')">0</button>
-            <button onclick="Calculate()" class="equal">=</button>
-        </div>
+      <div class="calculator">
+        <button id="toggle-mode" onclick="toggleMode()">&#9681;</button>
+        <input type="text" placeholder="0" id="output-screen" />
+        <button onclick="Clear()">Cl</button>
+        <button onclick="del()">Del</button>
+        <button onclick="display('%')">%</button>
+        <button onclick="display('/')">&#247;</button>
+        <button onclick="display('7')">7</button>
+        <button onclick="display('8')">8</button>
+        <button onclick="display('9')">9</button>
+        <button onclick="display('*')">&#215;</button>
+        <button onclick="display('4')">4</button>
+        <button onclick="display('5')">5</button>
+        <button onclick="display('6')">6</button>
+        <button onclick="display('-')">&#8722;</button>
+        <button onclick="display('1')">1</button>
+        <button onclick="display('2')">2</button>
+        <button onclick="display('3')">3</button>
+        <button onclick="display('+')">&#43;</button>
+        <button onclick="display('.')">.</button>
+        <button onclick="display('0')">0</button>
+        <button onclick="Calculate()" class="equal">=</button>
+      </div>
     </div>
-
     <script>
-        let outputScreen=document.getElementById("output-screen");
+      let outputScreen = document.getElementById('output-screen');
 
-        function display(num){
-            outputScreen.value += num;
+      function display(num) {
+        outputScreen.value += num;
+      }
+
+      function Calculate() {
+        try {
+          outputScreen.value = eval(outputScreen.value);
+        } catch (err) {
+          alert('Invalid');
         }
-        function Calculate(){
-            try{
-                outputScreen.value = eval(outputScreen.value);
-            }
-            catch(err)
-            {
-                alert("Invalid")
-            }
-        }
-        function Clear(){
-            outputScreen.value = "";
-        }
-        function del(){
-            outputScreen.value = outputScreen.value.slice(0,-1);
-        }
-    </script>
+      }
+
+      function Clear() {
+        outputScreen.value = '';
+      }
+
+      function del() {
+        outputScreen.value = outputScreen.value.slice(0, -1);
+      }
+
+      function toggleMode() {
+        const body = document.body;
+        const calculator = document.querySelector('.calculator');
+        const buttons = document.querySelectorAll('button');
+        const input = document.querySelector('input');
+
+        body.classList.toggle('dark-mode');
+        calculator.classList.toggle('dark-mode');
+        buttons.forEach(button => button.classList.toggle('dark-mode'));
+        input.classList.toggle('dark-mode');
+      }
+    </script
 </body>
 </html>
